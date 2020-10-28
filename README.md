@@ -38,9 +38,38 @@ pulic static Integer getMaxValue(List valueList){
 
 ```
 //在您自己的READ.md中，答案写到下面的位置
+import java.util.List;
+
+public class Max {
+ 
+   /**
+    * 得到list的最大值
+    * @param valueList 传入包含整数的list
+    * @return  
+    */
+   public static Integer getMaxValue (List valueList)  {
+       if (valueList == null || valueList.isEmpty()){
+           throw new NullPointerException("参数valueList集合为空");
+       }
+		Integer tempMaxValue = null;
+		for (Object getValue : valueList) {
+			if (getValue instanceof Integer) {
+				Integer temp = (Integer)getValue ;
+				if(tempMaxValue==null||temp>tempMaxValue){
+					tempMaxValue = temp;
+				} 
+			}
+		}
+
+       if (tempMaxValue == null) {
+           throw new NullPointerException("getMaxValue没有找到最大值,valueList不包含整数");
+       }
+       return  tempMaxValue;
+   }
+}
 
 
 //这样做的原因写到下面
-
-
+首先这段代码的主体是查询最大整数值，先把主体代码写出来，在考虑传参问题，如：1、集合是否存在整数（因为没有指定集合类型所以任何数据类型都可以），2、集合如果是为空那么直接报错，
+我也有考虑代码不断地使用Integer会不会导致GC频繁的问题，但是想到传递的都是Integer对象而不是int就不会造成这种现象。
 ```
